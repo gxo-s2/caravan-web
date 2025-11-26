@@ -2,13 +2,11 @@
 
 import { useState } from 'react';
 // import { useRouter } from 'next/navigation'; // Canvas 컴파일 오류로 주석 처리
-// import Link from 'next/link'; // Canvas 컴파일 오류로 주석 처리
+// import { Link } from 'next/link'; // Canvas 컴파일 오류로 주석 처리
+import axios from 'axios'; // 🚨 Axios 라이브러리 추가
 
-// NOTE: 타입 경로는 프로젝트 구조에 맞게 수정하세요.
-// import { Role } from '../../../types/backend-enums'; 
-
-// 🚨🚨🚨 핵심 수정: process가 정의되어 있지 않을 경우 오류를 방지합니다. 🚨🚨🚨
-// typeof process !== 'undefined' 검사를 통해 ReferenceError를 회피합니다.
+// 🚨🚨🚨 최종 수정: Render 주소를 가져옵니다. 🚨🚨🚨
+// typeof process !== 'undefined' 검사를 통해 Node 환경이 아닌 곳에서의 오류를 방지합니다.
 const API_BASE_URL = (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_API_BASE_URL) || '';
 
 // 💡 오류 해결: 경로 문제를 우회하기 위해 Role 타입을 여기에 직접 정의합니다.
@@ -21,13 +19,11 @@ export default function SignupPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    // 초기값을 명확하게 Role.GUEST로 설정
     const [role, setRole] = useState<Role>(Role.GUEST); 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    // const router = useRouter(); // Canvas 컴파일 오류로 주석 처리
-
-    // 임시 useRouter 및 Link 대체 함수
+    
+    // 임시 useRouter 및 Link 대체 함수 (Canvas에서 컴파일 가능하도록)
     const router = { push: (path: string) => console.log('Navigate to:', path) };
     const Link = ({ href, children, className }: { href: string, children: React.ReactNode, className?: string }) => (
         <a href={href} className={className} onClick={(e) => { e.preventDefault(); router.push(href); }}>{children}</a>
@@ -48,31 +44,31 @@ export default function SignupPage() {
         try {
             console.log('회원가입 요청 데이터:', { email, password, name, role });
 
-            // ⭐ 수정된 부분: API_BASE_URL (Render 주소)를 사용하고, 끝에 경로를 추가합니다.
+            // API_BASE_URL은 Render 주소입니다.
             const url = `${API_BASE_URL}/api/users/signup`; 
             
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password, name, role }),
+            // 🚨🚨🚨 fetch 대신 axios.post 사용 🚨🚨🚨
+            const res = await axios.post(url, {
+                email, password, name, role
             });
 
-            const data = await res.json();
-
-            if (!res.ok) {
-                // 서버에서 오는 에러 메시지를 사용자에게 표시합니다.
-                throw new Error(data.message || '회원가입에 실패했습니다.');
-            }
-
-            // alert() 대신 Vercel 환경에서 안전한 대체 UI를 사용하는 것이 권장되지만, 
-            // 현재 로컬 개발 환경과의 일관성을 위해 일단 유지합니다.
             alert('회원가입이 완료되었습니다! 로그인 해주세요.'); 
+            // 실제 Next.js 환경에서는 router.push('/auth/login'); 으로 이동합니다.
             router.push('/auth/login'); 
+            
         } catch (err: any) {
+             // Axios 에러 처리 (네트워크 오류, 서버 오류 분리)
             console.error(err);
-            setError(err.message || '알 수 없는 오류가 발생했습니다. (DB 연결 또는 서버 에러 확인 필요)');
+            if (err.response) {
+                // 서버로부터 응답을 받은 경우 (400, 500 에러 등)
+                setError(err.response.data.message || '회원가입에 실패했습니다. (서버 응답 오류)');
+            } else if (err.request) {
+                // 요청은 보냈으나 응답을 받지 못한 경우 (네트워크 오류, CORS 등)
+                setError('서버에 연결할 수 없습니다. 백엔드(Render) 상태를 확인해주세요.');
+            } else {
+                // 기타 오류
+                setError(err.message || '알 수 없는 오류가 발생했습니다.');
+            }
         } finally {
             setLoading(false);
         }
