@@ -85,6 +85,6 @@ CaravanShare는 카라반(캠핑카) 소유자(호스트)와 이용을 원하는
 두 서버 (**`http://localhost:3001`** 및 **`http://localhost:3000`**)가 모두 실행된 후, 웹 브라우저에서 아래 주소로 접속하여 모든 기능을 테스트할 수 있습니다.
 
 * **개발 환경 접속 주소:** 👉 **`http://localhost:3000`**
-* **배포된 웹사이트 접속 주소:** (선택 사항) 👉 **`https://caravan-app-chi.vercel.app`**
+* **배포된 웹사이트 접속 주소:** 👉 **`https://caravan-app-chi.vercel.app`**
 
 --------
