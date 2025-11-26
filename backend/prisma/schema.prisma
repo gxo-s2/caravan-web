@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  password       String
+  name           String
+  contactNumber  String?
+  profilePicture String?
+  isVerified     Boolean   @default(false)
+  role           Role      @default(GUEST)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  caravans     Caravan[]
+  reservations Reservation[]
+  reviews      Review[]
+  payments     Payment[] // ✅ [추가] 유저의 결제 내역 조회용
+}
+
+model Caravan {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  location    String
+  
+  // ✅ [수정] 가격 계산을 정수로 처리하기 위해 Int로 변경 및 기본값 설정
+  pricePerDay Int      @default(50000) 
+  
+  capacity    Int
+  images      String[] // ✅ [복구] 이미지 배열 필드가 필요하여 추가 (기존 코드 참고)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  host        User     @relation(fields: [hostId], references: [id])
+  hostId      String
+  
+  reservations Reservation[]
+  reviews      Review[]
+}
+
+model Reservation {
+  id         String            @id @default(cuid())
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Int               // ✅ [수정] 가격 계산 일관성을 위해 Int로 변경 (Float도 가능하나 Int 권장)
+  status     ReservationStatus @default(PENDING)
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  
+  guest      User              @relation(fields: [guestId], references: [id])
+  guestId    String
+  
+  caravan    Caravan           @relation(fields: [caravanId], references: [id])
+  caravanId  String
+  
+  payment    Payment?          // ✅ [추가] 1:1 결제 정보 연결
+}
+
+model Payment {
+  id            String   @id @default(cuid())
+  amount        Int      // ✅ [수정] 가격 일관성을 위해 Int로 변경
+  
+  // ✅ [수정] 'VIRTUAL_CARD' 등 다양한 가상 결제 수단을 허용하기 위해 String으로 변경
+  // (Enum을 쓰면 'VIRTUAL_CARD' 값을 넣을 때 에러가 발생할 수 있음)
+  method        String   @default("CARD") 
+  
+  status        String   @default("COMPLETED")
+  
+  paymentDate   DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+  reservationId String      @unique
+  
+  // ✅ [추가] 결제한 유저 정보 연결 (결제 이력 조회 시 필요)
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  
+  caravan   Caravan  @relation(fields: [caravanId], references: [id])
+  caravanId String
+}
+
+enum Role {
+  GUEST
+  HOST
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+// PaymentMethod, PaymentStatus Enum은 String으로 대체하여 유연성을 확보했습니다.
+// 필요 시 다시 활성화하여 사용할 수 있습니다.
