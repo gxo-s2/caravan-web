@@ -7,7 +7,9 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // 🚨🚨🚨 임시 수정: 환경 변수 오류를 우회하기 위해 DB URL을 코드에 직접 입력합니다.
+  // 마이그레이션 성공 후에는 반드시 'url = env("DATABASE_URL")'로 되돌려야 합니다.
+  url      = "postgresql://neondb_owner:npg_E4aTOGwLz6xQ@ep-gentle-shadow-a1ux65ln-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require" 
 }
 
 model User {
