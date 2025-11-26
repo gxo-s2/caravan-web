@@ -56,7 +56,7 @@ export default function HostReservationsPage() {
     const fetchReservations = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:3001/api/reservations/host/${hostId}`);
+        const response = await axios.get(`https://caravan-app-api.onrender.com/api/reservations/host/${hostId}`);
         setReservations(response.data);
       } catch (err) {
         console.error("예약 목록 로딩 실패:", err);
@@ -76,7 +76,7 @@ export default function HostReservationsPage() {
 
     setProcessingId(id);
     try {
-      await axios.patch(`http://localhost:3001/api/reservations/${id}/status`, { status });
+      await axios.patch(`https://caravan-app-api.onrender.com/api/reservations/${id}/status`, { status });
       
       // 상태 변경 성공 시 UI 업데이트
       setReservations(prev => 

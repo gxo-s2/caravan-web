@@ -73,7 +73,7 @@ const ReservationLookupPage = () => {
     setError(null);
     setReservation(null);
     try {
-      const response = await axios.get(`http://localhost:3001/api/reservations/lookup/${reservationId}`);
+      const response = await axios.get(`https://caravan-app-api.onrender.com/api/reservations/lookup/${reservationId}`);
       setReservation(response.data);
     } catch (err: any) {
       if (err.response && err.response.status === 404) {

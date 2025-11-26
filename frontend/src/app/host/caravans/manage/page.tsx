@@ -49,7 +49,7 @@ export default function ManageCaravansPage() {
       const fetchCaravans = async () => {
         setLoading(true);
         try {
-          const response = await axios.get(`http://localhost:3001/api/caravans/host/${user.id}`);
+          const response = await axios.get(`https://caravan-app-api.onrender.com/api/caravans/host/${user.id}`);
           setCaravans(response.data);
           setError(null);
         } catch (err) {
@@ -69,7 +69,7 @@ export default function ManageCaravansPage() {
 
     setProcessingId(caravanId);
     try {
-      await axios.delete(`http://localhost:3001/api/caravans/${caravanId}`);
+      await axios.delete(`https://caravan-app-api.onrender.com/api/caravans/${caravanId}`);
       alert('카라반이 성공적으로 삭제되었습니다.');
       // 삭제 성공 시 목록에서 해당 아이템 제거하여 UI 업데이트
       setCaravans(prev => prev.filter(c => c.id !== caravanId));

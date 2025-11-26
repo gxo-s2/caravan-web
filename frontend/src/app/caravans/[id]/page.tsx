@@ -127,12 +127,12 @@ export default function CaravanDetailPage() {
       try {
         setLoading(true);
         // 1. 카라반 정보 조회
-        const caravanRes = await axios.get(`http://127.0.0.1:3001/api/caravans/${id}`);
+        const caravanRes = await axios.get(`https://caravan-app-api.onrender.com/api/caravans/${id}`);
         setCaravan(caravanRes.data);
 
         // 2. 후기 목록 조회
         try {
-          const reviewsRes = await axios.get(`http://127.0.0.1:3001/api/reviews/caravan/${id}`);
+          const reviewsRes = await axios.get(`https://caravan-app-api.onrender.com/api/reviews/caravan/${id}`);
           setReviews(reviewsRes.data);
         } catch (reviewErr) {
           console.warn("리뷰를 불러오지 못했습니다:", reviewErr);
@@ -208,7 +208,7 @@ export default function CaravanDetailPage() {
         totalPrice: calculateTotal(), 
       };
 
-      await axios.post('http://127.0.0.1:3001/api/reservations', payload);
+      await axios.post('https://caravan-app-api.onrender.com/api/reservations', payload);
       setIsModalOpen(false);
       alert('🎉 예약 신청이 완료되었습니다! (호스트 승인 대기)');
       if (typeof window !== 'undefined') window.location.href = `${window.location.origin}/my/reservations`;

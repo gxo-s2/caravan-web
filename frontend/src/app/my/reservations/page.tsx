@@ -33,7 +33,7 @@ function ReviewModal({ isOpen, onClose, caravanId, caravanName, onSuccess }: Rev
 
     setLoading(true);
     try {
-      await axios.post('http://127.0.0.1:3001/api/reviews', {
+      await axios.post('https://caravan-app-api.onrender.com/api/reviews', {
         authorId: user.id,
         caravanId,
         rating,
@@ -146,7 +146,7 @@ export default function MyReservationsPage() {
         return;
       }
       const user = JSON.parse(userStr);
-      const response = await axios.get(`http://127.0.0.1:3001/api/reservations/user/${user.id}`);
+      const response = await axios.get(`https://caravan-app-api.onrender.com/api/reservations/user/${user.id}`);
       setReservations(response.data);
     } catch (err: any) {
       console.error('예약 불러오기 실패:', err);
@@ -174,7 +174,7 @@ export default function MyReservationsPage() {
   const handleCancelReservation = async (reservationId: string) => {
     if (!confirm('정말로 예약을 취소하시겠습니까?\n취소 시 환불 정책에 따라 처리됩니다.')) return;
     try {
-      await axios.patch(`http://127.0.0.1:3001/api/reservations/${reservationId}/status`, {
+      await axios.patch(`https://caravan-app-api.onrender.com/api/reservations/${reservationId}/status`, {
         status: 'CANCELLED',
       });
       alert('예약이 취소되었습니다.');

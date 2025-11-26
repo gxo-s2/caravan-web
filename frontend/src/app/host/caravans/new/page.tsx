@@ -55,7 +55,7 @@ export default function NewCaravanPage() {
                 images: ["https://placehold.co/600x400"], 
             };
 
-            await axios.post("http://localhost:3001/api/caravans", payload);
+            await axios.post("https://caravan-app-api.onrender.com/api/caravans", payload);
 
             alert("카라반이 성공적으로 등록되었습니다!");
             

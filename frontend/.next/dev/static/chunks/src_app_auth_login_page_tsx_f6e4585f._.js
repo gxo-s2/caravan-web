@@ -34,12 +34,12 @@ function LoginPage() {
             let user;
             // 1. 회원가입 시도
             try {
-                const signupRes = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post('http://127.0.0.1:3001/api/users/signup', credentials);
+                const signupRes = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post('https://caravan-app-api.onrender.com/api/users/signup', credentials);
                 user = signupRes.data;
             } catch (err) {
                 // 2. 이미 존재하는 계정(409 Conflict)이라면 -> 로그인 시도
                 if (err.response && err.response.status === 409) {
-                    const loginRes = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post('http://127.0.0.1:3001/api/users/login', {
+                    const loginRes = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post('https://caravan-app-api.onrender.com/api/users/login', {
                         email: credentials.email,
                         password: credentials.password
                     });
@@ -67,7 +67,7 @@ function LoginPage() {
         setLoading(true);
         setError('');
         try {
-            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post('http://127.0.0.1:3001/api/users/login', {
+            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post('https://caravan-app-api.onrender.com/api/users/login', {
                 email,
                 password
             });

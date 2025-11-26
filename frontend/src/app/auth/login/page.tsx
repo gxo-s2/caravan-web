@@ -27,12 +27,12 @@ export default function LoginPage() {
 
       // 1. 회원가입 시도
       try {
-        const signupRes = await axios.post('http://127.0.0.1:3001/api/users/signup', credentials);
+        const signupRes = await axios.post('https://caravan-app-api.onrender.com/api/users/signup', credentials);
         user = signupRes.data;
       } catch (err: any) {
         // 2. 이미 존재하는 계정(409 Conflict)이라면 -> 로그인 시도
         if (err.response && err.response.status === 409) {
-          const loginRes = await axios.post('http://127.0.0.1:3001/api/users/login', {
+          const loginRes = await axios.post('https://caravan-app-api.onrender.com/api/users/login', {
             email: credentials.email,
             password: credentials.password,
           });
@@ -64,7 +64,7 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const res = await axios.post('http://127.0.0.1:3001/api/users/login', {
+      const res = await axios.post('https://caravan-app-api.onrender.com/api/users/login', {
         email,
         password,
       });

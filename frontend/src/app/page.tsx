@@ -102,7 +102,7 @@ const HostDashboard = ({ user }: { user: User }) => {
   const fetchReservations = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://127.0.0.1:3001/api/reservations/host/${user.id}`);
+      const response = await axios.get(`https://caravan-app-api.onrender.com/api/reservations/host/${user.id}`);
       setReservations(response.data);
     } catch (error) {
       console.error("Failed to fetch reservations", error);
@@ -119,7 +119,7 @@ const HostDashboard = ({ user }: { user: User }) => {
 
   const handleUpdateStatus = async (id: string, status: 'CONFIRMED' | 'CANCELLED') => {
     try {
-      await axios.patch(`http://127.0.0.1:3001/api/reservations/${id}/status`, { status });
+      await axios.patch(`https://caravan-app-api.onrender.com/api/reservations/${id}/status`, { status });
       alert(`예약이 ${status === 'CONFIRMED' ? '승인' : '거절'}되었습니다.`);
       fetchReservations(); // Refresh the list
     } catch (error) {

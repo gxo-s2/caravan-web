@@ -30,7 +30,7 @@ export default function RegisterPage() {
 
     try {
       // 1. 회원가입 요청
-      const res = await axios.post('http://127.0.0.1:3001/api/users/signup', {
+      const res = await axios.post('https://caravan-app-api.onrender.com/api/users/signup', {
         email: formData.email,
         password: formData.password,
         name: formData.name,

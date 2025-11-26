@@ -260,7 +260,7 @@ const HostDashboard = ({ user })=>{
     const fetchReservations = async ()=>{
         setLoading(true);
         try {
-            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`http://127.0.0.1:3001/api/reservations/host/${user.id}`);
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`https://caravan-app-api.onrender.com/api/reservations/host/${user.id}`);
             setReservations(response.data);
         } catch (error) {
             console.error("Failed to fetch reservations", error);
@@ -277,7 +277,7 @@ const HostDashboard = ({ user })=>{
     ]);
     const handleUpdateStatus = async (id, status)=>{
         try {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].patch(`http://127.0.0.1:3001/api/reservations/${id}/status`, {
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].patch(`https://caravan-app-api.onrender.com/api/reservations/${id}/status`, {
                 status
             });
             alert(`예약이 ${status === 'CONFIRMED' ? '승인' : '거절'}되었습니다.`);

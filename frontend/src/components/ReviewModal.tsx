@@ -30,7 +30,7 @@ export default function ReviewModal({ isOpen, onClose, caravanId, caravanName, o
     setLoading(true);
     try {
       // 백엔드 API 호출 (포트 3001)
-      await axios.post('http://127.0.0.1:3001/api/reviews', {
+      await axios.post('https://caravan-app-api.onrender.com/api/reviews', {
         authorId: user.id,
         caravanId,
         rating,

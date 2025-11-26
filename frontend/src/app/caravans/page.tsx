@@ -21,7 +21,7 @@ export default function CaravansPage() {
     const fetchCaravans = async () => {
       try {
         // 127.0.0.1로 백엔드 연결
-        const response = await axios.get('http://127.0.0.1:3001/api/caravans');
+        const response = await axios.get('https://caravan-app-api.onrender.com/api/caravans');
         setCaravans(response.data);
       } catch (err) {
         console.error('카라반 목록 로딩 실패:', err);

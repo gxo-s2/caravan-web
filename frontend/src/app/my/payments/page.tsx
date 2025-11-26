@@ -35,7 +35,7 @@ export default function MyPaymentsPage() {
       const user = JSON.parse(storedUser);
 
       try {
-        const response = await axios.get(`http://localhost:3001/api/payments/user/${user.id}`);
+        const response = await axios.get(`https://caravan-app-api.onrender.com/api/payments/user/${user.id}`);
         setPayments(response.data);
       } catch (err) {
         setError('결제 내역을 불러오는 데 실패했습니다.');

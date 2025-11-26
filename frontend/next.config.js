@@ -9,7 +9,7 @@
             // '/api/'로 시작하는 모든 요청을 가로챕니다.
             source: '/api/:path*',
             // 백엔드 서버의 3001 포트로 요청을 전달합니다.
-            destination: 'http://localhost:3001/api/:path*', 
+            destination: 'https://caravan-app-api.onrender.com/api/:path*', 
           },
         ];
       },
