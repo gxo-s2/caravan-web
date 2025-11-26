@@ -1,0 +1,29 @@
+name: Run Database Migration
+
+on:
+  workflow_dispatch: # GitHub 웹사이트에서 수동으로 실행 가능하도록 설정
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend # backend 폴더에서 실행
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 사용 중인 Node.js 버전에 맞게 설정
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Execute Prisma Migration
+        run: npx prisma migrate deploy
+        env:
+          # Render에 설정한 것과 동일한 NeonDB URL을 GitHub Secret에 설정해야 합니다.
+          DATABASE_URL: psql 'postgresql://neondb_owner:npg_E4aTOGwLz6xQ@ep-gentle-shadow-a1ux65ln-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
