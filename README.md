@@ -66,6 +66,14 @@ CaravanShare는 카라반(캠핑카) 소유자(호스트)와 이용을 원하는
 
 본 프로젝트는 클라우드 서비스를 활용하여 프론트엔드와 백엔드를 분리(Split Deployment)하여 배포했습니다.
 
+✅ 배포된 웹사이트 주소: 👉 https://caravan-app-chi.vercel.app
+
+테스트용 계정
+
+호스트 계정<br>아이디 : testhost@example.com<br>비밀번호 : testhost
+
+게스트 계정<br>아이디 : testguest@example.com<br>비밀번호 : testguest
+
 ### 3.1. 배포 환경 구성
 
 | 컴포넌트 | 배포 플랫폼 | 상세 설명 |
