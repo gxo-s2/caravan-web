@@ -3,8 +3,9 @@ import {
   createCaravan, 
   getAllCaravans, 
   getCaravanById,
-  getCaravansByHost, // 1. 호스트별 조회 컨트롤러 임포트
-  deleteCaravan,      // 2. 삭제 컨트롤러 임포트
+  getCaravansByHost,
+  deleteCaravan,
+  updateCaravan,      // 'updateCaravan' 컨트롤러 함수 임포트
 } from './caravan.controller';
 
 const router = Router();
@@ -17,6 +18,9 @@ router.get('/', getAllCaravans);
 
 // GET /api/caravans/host/:hostId - 특정 호스트의 카라반 목록 조회
 router.get('/host/:hostId', getCaravansByHost);
+
+// PUT /api/caravans/:id - 특정 카라반 정보 수정
+router.put('/:id', updateCaravan);
 
 // DELETE /api/caravans/:id - 특정 카라반 삭제
 router.delete('/:id', deleteCaravan);

@@ -82,6 +82,18 @@ export class CaravanService {
   }
 
   /**
+   * 카라반 정보를 업데이트합니다.
+   * @param id 업데이트할 카라반의 UUID
+   * @param data 업데이트할 카라반 데이터
+   */
+  async updateCaravan(id: string, data: Partial<Caravan>): Promise<Caravan> {
+    return prisma.caravan.update({
+      where: { id },
+      data,
+    });
+  }
+
+  /**
    * Create a new caravan
    * @param data Caravan data (pricePerDay, capacity 등)
    * @param hostId The ID of the host user (string UUID)

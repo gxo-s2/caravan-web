@@ -1,5 +1,6 @@
 {
-  "/auth/login/page": "app/auth/login/page.js",
-  "/auth/register/page": "app/auth/register/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/caravans/edit/[id]/page": "app/caravans/edit/[id]/page.js",
+  "/host/caravans/manage/page": "app/host/caravans/manage/page.js",
   "/page": "app/page.js"
 }

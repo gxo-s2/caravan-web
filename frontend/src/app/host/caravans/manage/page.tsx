@@ -121,7 +121,10 @@ export default function ManageCaravansPage() {
                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{caravan.name}</td>
                     <td className="px-6 py-4">{caravan.location}</td>
                     <td className="px-6 py-4">₩{caravan.pricePerDay.toLocaleString()}</td>
-                    <td className="px-6 py-4 text-right">
+                    <td className="px-6 py-4 text-right space-x-4">
+                      <Link href={`/caravans/edit/${caravan.id}`} className="font-medium text-blue-600 hover:text-blue-800 hover:underline">
+                        수정
+                      </Link>
                       <button
                         onClick={() => handleDelete(caravan.id)}
                         disabled={processingId === caravan.id}

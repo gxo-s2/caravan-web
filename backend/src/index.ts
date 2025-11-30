@@ -11,7 +11,7 @@ import reviewRoutes from './review/review.routes';
 
 console.log("Starting CaravanShare Backend Server...");
 
-const app = express();
+export const app = express();
 const port = Number(process.env.PORT) || 3001;
 
 // CORS 설정: 모든 출처 허용 (개발 편의성 및 연결 오류 방지)
