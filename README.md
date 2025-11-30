@@ -68,6 +68,15 @@ CaravanShare는 카라반(캠핑카) 소유자(호스트)와 이용을 원하는
 
 ✅ 배포된 웹사이트 주소: 👉 https://caravan-app-chi.vercel.app
 
+테스트용 계정
+호스트 계정
+아이디 : testhost@example.com
+비밀번호 : testhost
+
+게스트 계정
+아이디 : testguest@example.com
+비밀번호 : testguest
+
 ### 3.1. 배포 환경 구성
 
 | 컴포넌트 | 배포 플랫폼 | 상세 설명 |
