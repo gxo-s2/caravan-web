@@ -71,12 +71,10 @@ CaravanShare는 카라반(캠핑카) 소유자(호스트)와 이용을 원하는
 테스트용 계정
 
 호스트 계정
-아이디 : testhost@example.com
-비밀번호 : testhost
+ 아이디 : testhost@example.com / 비밀번호 : testhost
 
 게스트 계정
-아이디 : testguest@example.com
-비밀번호 : testguest
+ 아이디 : testguest@example.com / 비밀번호 : testguest
 
 ### 3.1. 배포 환경 구성
 
